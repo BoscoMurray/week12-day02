@@ -2,27 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Star Wars Quotes</title>
+  <title>Monero</title>
   <link rel="stylesheet" href="styles.css">
   <script src="bundle.js"></script>
 </head>
 <body>
-<div class="container">
-<form >
-  <input type="text" placeholder="name" name="name">
-  <input type="text" placeholder="quote" name="quote">
-  <button type="submit">Submit</button>
-</form>
-<form action="/delete" method="POST">
-<button id="deleteButton" type="submit">Delete All</button>
-</form>
-</div>
-<div class="image_container">
-<img id="yoda-pic" src="/images/yoda.png" />
-</div>
-<div class="list-container">
-<ul id="quotes">
-</ul>
-</div>
+  <div class="container">
+    <form >
+      <input type="text" placeholder="YYYY-MM-DD" name="date">
+      <input type="text" placeholder="Price" name="price">
+      <button type="submit">Submit</button>
+    </form>
+    <form action="/delete" method="POST">
+      <button id="deleteButton" type="submit">Delete All</button>
+    </form>
+  </div>
+  <div class="image_container">
+    <img id="monero-pic" src="/images/monero.png" />
+  </div>
+  <div class="list-container">
+    <ul id="quotes">
+    </ul>
+  </div>
 </body>
 </html>
