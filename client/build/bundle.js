@@ -70,19 +70,19 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-var QuoteView = function(quotes){
-  this.render(quotes);
+var QuoteView = function(prices){
+  this.render(prices);
 }
 
 QuoteView.prototype = {
-  render: function(quotes){
+  render: function(prices){
     
-    console.log(quotes);
-    quotes.forEach( function(quote){
+    console.log(prices);
+    prices.forEach( function(price){
       var li = document.createElement('li');
       var text = document.createElement('p');
-      var ul = document.getElementById('quotes');
-      text.innerText = quote.name + ": " + '"' + quote.quote + '"';
+      var ul = document.getElementById('prices');
+      text.innerText = price.date + ": " + '"' + price.price + '"';
       li.appendChild(text);
       ul.appendChild(li);
     })
@@ -97,8 +97,24 @@ QuoteView.prototype = {
 
 var QuoteView = __webpack_require__(0);
 
+var makeRequest = function(url, callback) {
+  var request = new XMLHttpRequest();
+  request.open('GET', url);
+  request.addEventListener('load', callback);
+  request.send();
+}
+
+var requestComplete = function() {
+  if(this.status !== 200) return;
+
+  var quoteString = this.responseText;
+  var quotes = JSON.parse(quoteString);
+  var quoteView = new QuoteView(quotes);
+}
+
 var app = function(){
-  
+  var url = "http://localhost:3000/prices";
+  makeRequest(url, requestComplete);
 }
 
 

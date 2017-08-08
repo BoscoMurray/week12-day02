@@ -21,6 +21,12 @@ app.post('/prices', function(req, res){
   });
 });
 
+app.post('/delete', function(req, res) {
+  db.collection('prices').drop(function(){
+    res.redirect('/');
+  });
+});
+
 MongoClient.connect('mongodb://localhost:27017/bitcoin_monero', function(err, database){
   if(err) {
     console.log(err);
