@@ -67,14 +67,44 @@
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
+/* 0 */,
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var PriceView = __webpack_require__(2);
+
+
+var makeRequest = function(url, callback) {
+  var request = new XMLHttpRequest();
+  request.open('GET', url);
+  request.addEventListener('load', callback);
+  request.send();
+}
+
+var requestComplete = function() {
+  if(this.status !== 200) return;
+
+  var priceString = this.responseText;
+  var prices = JSON.parse(priceString);
+  var priceView = new PriceView(prices);
+}
+
+var app = function(){
+  var url = "http://localhost:3000/prices";
+  makeRequest(url, requestComplete);
+}
+
+window.addEventListener('load', app);
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
-var QuoteView = function(prices){
+var PriceView = function(prices){
   this.render(prices);
 }
 
-QuoteView.prototype = {
+PriceView.prototype = {
   render: function(prices){
     
     console.log(prices);
@@ -89,36 +119,7 @@ QuoteView.prototype = {
   }
 }
 
- module.exports = QuoteView;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var QuoteView = __webpack_require__(0);
-
-var makeRequest = function(url, callback) {
-  var request = new XMLHttpRequest();
-  request.open('GET', url);
-  request.addEventListener('load', callback);
-  request.send();
-}
-
-var requestComplete = function() {
-  if(this.status !== 200) return;
-
-  var quoteString = this.responseText;
-  var quotes = JSON.parse(quoteString);
-  var quoteView = new QuoteView(quotes);
-}
-
-var app = function(){
-  var url = "http://localhost:3000/prices";
-  makeRequest(url, requestComplete);
-}
-
-
-window.addEventListener('load', app);
+ module.exports = PriceView;
 
 /***/ })
 /******/ ]);

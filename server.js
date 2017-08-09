@@ -4,10 +4,13 @@ var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var db;
 
-
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
 app.use(express.static('client/build'));
+
+// app.use(require('./controllers/index.js'));
+
+
 
 app.get('/prices', function(req, res) {
   db.collection('prices').find().toArray(function(err, results){
@@ -41,6 +44,26 @@ MongoClient.connect('mongodb://localhost:27017/bitcoin_monero', function(err, da
   });
 });
 
+
+// the below is not actually needed - express libraries automatically look for and use the index.html in build.
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/client/build/index.html');
+});
+
+
+//express library
+//calback(requestObject, responseObject);
+app.get('/api/prices', function(req, res) {
+  db.collection('prices').find().toArray(function(err, results){
+    res.json(results);
+  });
+});
+
+
+app.get('/api/:id', function(req, res) {
+
+});
+
+app.post('/api', function(req, res) {
+  
 });

@@ -1,8 +1,8 @@
-var QuoteView = function(prices){
+var PriceView = function(prices){
   this.render(prices);
 }
 
-QuoteView.prototype = {
+PriceView.prototype = {
   render: function(prices){
     
     console.log(prices);
@@ -17,4 +17,4 @@ QuoteView.prototype = {
   }
 }
 
- module.exports = QuoteView;
+ module.exports = PriceView;
